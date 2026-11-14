@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "recipes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "templateId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "institutionId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "institutionName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "country": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$"
+          },
+          "statementKind": {
+            "type": "string",
+            "enum": [
+              "bank_account",
+              "credit_card",
+              "loan"
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "requiredCapabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^templates\\/[a-z]{2}\\/[a-z0-9-]+\\/[a-z0-9.-]+\\.json$"
+          },
+          "changeSummary": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "templateId",
+          "institutionId",
+          "institutionName",
+          "displayName",
+          "country",
+          "statementKind",
+          "revision",
+          "schemaVersion",
+          "requiredCapabilities",
+          "sha256",
+          "path",
+          "changeSummary"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "version",
+    "recipes"
+  ],
+  "additionalProperties": false,
+  "not": {
+    "const": "unknown"
+  }
+}

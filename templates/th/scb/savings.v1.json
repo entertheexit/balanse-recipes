@@ -1,0 +1,66 @@
+{
+  "institutionId": "scb",
+  "templateId": "scb.savings.v1",
+  "country": "TH",
+  "statementKind": "bank_account",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["ไทยพาณิชย์", "รายการเดินบัญชี", "SCB"],
+      "en": ["SIAM COMMERCIAL BANK", "SCB", "ACCOUNT STATEMENT"]
+    },
+    "requiredAll": ["STATEMENT OF SAVING ACCOUNT", "Account No."],
+    "requiredAny": ["SCB", "ไทยพาณิชย์", "SIAM COMMERCIAL BANK"],
+    "negativeKeywords": ["CREDIT CARD", "CARD NUMBER"]
+  },
+  "accountHints": {
+    "regexes": ["(?:Account|บัญชี)\\s*(?:No\\.|Number|เลขที่)?\\s*[:：]?\\s*(?<accountId>[0-9Xx*\\- ]{4,})"],
+    "labelKeywords": ["Account No.", "เลขที่บัญชี"]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": "all",
+        "xMin": 25,
+        "xMax": 590,
+        "yMin": 80,
+        "yMax": 625
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 25, "xMax": 94.9, "required": true },
+      { "name": "code", "xMin": 94.9, "xMax": 120, "required": true },
+      { "name": "channel", "xMin": 120, "xMax": 190 },
+      { "name": "amount", "xMin": 190, "xMax": 330, "required": true },
+      { "name": "balance", "xMin": 330, "xMax": 393.9, "required": true },
+      { "name": "description", "xMin": 393.9, "xMax": 590, "required": true }
+    ],
+    "rowStartRegex": "^\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}",
+    "dateRegex": "\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}",
+    "amountRegex": "\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "balanceRegex": "[-+]?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 3,
+      "requiredColumns": ["date", "code", "amount", "balance", "description"],
+      "headerSkipKeywords": ["Date", "วันที่", "Balance", "Description"],
+      "stopBeforeKeywords": [],
+      "continuationColumns": ["description"]
+    },
+    "directionRules": {
+      "debitIndicators": [],
+      "creditIndicators": [],
+      "debitCodes": ["X2"],
+      "creditCodes": ["X1"],
+      "positiveAmountDirection": "unknown"
+    }
+  }
+}

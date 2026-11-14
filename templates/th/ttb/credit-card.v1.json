@@ -1,0 +1,68 @@
+{
+  "institutionId": "ttb",
+  "templateId": "ttb.credit-card.v1",
+  "country": "TH",
+  "statementKind": "credit_card",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["ทหารไทยธนชาต", "รายการเดินบัญชี", "วงเงินบัตร", "หมายเลขบัตร"],
+      "en": ["TTB", "TMBTHANACHART", "CARD"]
+    },
+    "requiredAll": ["วงเงินบัตร", "หมายเลขบัตร"],
+    "requiredAny": ["รายการรอเรียกเก็บ", "รายการเรียกเก็บแล้ว"],
+    "negativeKeywords": ["รายการเดินบัญชีเงินฝาก"]
+  },
+  "accountHints": {
+    "regexes": [
+      "หมายเลขบัตร\\s*(?<accountId>[0-9Xx*\\- ]{4,})",
+      "(?:Card|บัตร)\\s*(?:No\\.|Number|เลขที่)?\\s*[:：]?\\s*(?<accountId>[0-9Xx*\\- ]{4,})"
+    ],
+    "labelKeywords": ["หมายเลขบัตร", "Card No."]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": "all",
+        "xMin": 35,
+        "xMax": 580,
+        "yMin": 250,
+        "yMax": 520
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 35, "xMax": 115, "required": true },
+      { "name": "postedDate", "xMin": 115, "xMax": 195 },
+      { "name": "description", "xMin": 195, "xMax": 495, "required": true },
+      { "name": "amount", "xMin": 495, "xMax": 580, "required": true }
+    ],
+    "rowStartRegex": "^\\d{1,2}\\s+\\S+\\s+\\d{2,4}$",
+    "dateRegex": "\\d{1,2}\\s+\\S+\\s+\\d{2,4}",
+    "postedDateRegex": "\\d{1,2}\\s+\\S+\\s+\\d{2,4}",
+    "amountRegex": "[-+]?\\s*\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?(?:\\s*THB)?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 3,
+      "requiredColumns": ["date", "description", "amount"],
+      "headerSkipKeywords": ["วันที่", "รายละเอียด", "จำนวนเงิน", "จํานวนเงิน"],
+      "stopBeforeKeywords": [],
+      "continuationColumns": []
+    },
+    "directionRules": {
+      "debitIndicators": [],
+      "creditIndicators": [],
+      "debitCodes": [],
+      "creditCodes": [],
+      "positiveAmountDirection": "debit",
+      "negativeAmountDirection": "credit"
+    }
+  }
+}

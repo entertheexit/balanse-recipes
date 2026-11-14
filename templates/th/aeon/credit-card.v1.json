@@ -1,0 +1,83 @@
+{
+  "institutionId": "aeon",
+  "templateId": "aeon.credit-card.v1",
+  "country": "TH",
+  "statementKind": "credit_card",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["อิออน", "ใบแจ้งยอดค่าใช้จ่ายบัตรเครดิต", "ใบแจ้งการชำระเงิน"],
+      "en": ["AEON", "GOLD VS PAYWAVE", "OPENING BALANCE", "BALANCE BROUGHT FORWARD"]
+    },
+    "requiredAll": ["AEON", "OPENING BALANCE", "BALANCE BROUGHT FORWARD"],
+    "requiredAny": ["GOLD VS PAYWAVE", "SUBTOTAL"],
+    "negativeKeywords": ["ACCOUNT SUMMARY", "รายการเดินบัญชีเงินฝาก"]
+  },
+  "accountHints": {
+    "regexes": [
+      "(?<accountId>\\d{4}\\s*-\\s*\\d{2}\\*\\*\\s*-\\s*\\*{4}\\s*-\\s*\\d{4})",
+      "(?:CARD NO\\.|Card No\\.|หมายเลขบัตร)\\s*(?<accountId>[0-9*\\- ]{4,})"
+    ],
+    "labelKeywords": ["CARD NO.", "Card No.", "หมายเลขบัตร"]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": 1,
+        "xMin": 20,
+        "xMax": 510,
+        "yMin": 380,
+        "yMax": 505
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 20, "xMax": 76, "required": true },
+      { "name": "postedDate", "xMin": 76, "xMax": 130 },
+      { "name": "description", "xMin": 130, "xMax": 425, "required": true },
+      { "name": "amount", "xMin": 425, "xMax": 510, "required": true }
+    ],
+    "rowStartRegex": "^\\d{1,2}/\\d{1,2}/\\d{4}$",
+    "dateRegex": "\\d{1,2}/\\d{1,2}/\\d{4}",
+    "postedDateRegex": "\\d{1,2}/\\d{1,2}/\\d{4}",
+    "amountRegex": "[-+]?\\s*\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 3,
+      "requiredColumns": ["date", "description", "amount"],
+      "headerSkipKeywords": [
+        "Trans. Date",
+        "Posting Date",
+        "Description",
+        "Amount",
+        "OPENING BALANCE",
+        "BALANCE BROUGHT FORWARD"
+      ],
+      "stopBeforeKeywords": [
+        "SUBTOTAL",
+        "TOTAL BALANCE",
+        "PRINCIPAL",
+        "INTEREST CREDIT PURCHASE",
+        "INTEREST CASH ADVANCE",
+        "OTHER CHARGE",
+        "AEON HAPPY PLAN"
+      ],
+      "continuationColumns": []
+    },
+    "directionRules": {
+      "debitIndicators": [],
+      "creditIndicators": ["PAYMENT RECEIVED", "THANK YOU", "ADJUST ANNUAL FEE"],
+      "debitCodes": [],
+      "creditCodes": [],
+      "positiveAmountDirection": "debit",
+      "negativeAmountDirection": "credit"
+    }
+  }
+}

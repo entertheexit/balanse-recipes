@@ -1,0 +1,67 @@
+{
+  "institutionId": "kbank",
+  "templateId": "kbank.savings.v1",
+  "country": "TH",
+  "statementKind": "bank_account",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["กสิกรไทย", "รายการเดินบัญชี", "KBank"],
+      "en": ["KASIKORNBANK", "KBANK", "ACCOUNT STATEMENT"]
+    },
+    "requiredAll": ["เลขที่บัญชีเงินฝาก", "รวมถอนเงิน", "รวมฝากเงิน"],
+    "requiredAny": ["KASIKORNBANK", "KBANK", "กสิกรไทย"],
+    "negativeKeywords": ["CREDIT CARD STATEMENT", "CARD NUMBER", "ยอดรวมทุกบัตร", "ธนาคารกรุงศรีอยุธยา", "KRUNGSRI"]
+  },
+  "accountHints": {
+    "regexes": ["(?:Account|บัญชี)\\s*(?:No\\.|Number|เลขที่)?\\s*[:：]?\\s*(?<accountId>[0-9Xx*\\- ]{4,})"],
+    "labelKeywords": ["Account No.", "เลขที่บัญชี"]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": "all",
+        "xMin": 60,
+        "xMax": 585,
+        "yMin": 90,
+        "yMax": 645
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 60, "xMax": 100, "required": true },
+      { "name": "time", "xMin": 100, "xMax": 122.9 },
+      { "name": "description", "xMin": 122.9, "xMax": 220, "required": true },
+      { "name": "amount", "xMin": 220, "xMax": 295, "required": true },
+      { "name": "balance", "xMin": 295, "xMax": 332.9, "required": true },
+      { "name": "channel", "xMin": 332.9, "xMax": 403.9 },
+      { "name": "details", "xMin": 403.9, "xMax": 585 }
+    ],
+    "rowStartRegex": "^\\d{1,2}-\\d{1,2}-\\d{2,4}$",
+    "dateRegex": "\\d{1,2}-\\d{1,2}-\\d{2,4}",
+    "amountRegex": "\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "balanceRegex": "[-+]?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description", "details"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 3,
+      "requiredColumns": ["date", "description", "amount", "balance"],
+      "headerSkipKeywords": ["วันที่", "ยอดยกมา", "ยอดยกไป", "ถอนเงิน / ฝากเงิน"],
+      "stopBeforeKeywords": [],
+      "continuationColumns": ["details"]
+    },
+    "directionRules": {
+      "debitIndicators": ["โอนไป", "ถอนเงินสด", "ชำระเงิน", "จ่าย"],
+      "creditIndicators": ["รับโอนเงิน", "รับโอน", "จาก ", "ฝาก", "ดอกเบี้ย"],
+      "debitCodes": [],
+      "creditCodes": [],
+      "positiveAmountDirection": "unknown"
+    }
+  }
+}

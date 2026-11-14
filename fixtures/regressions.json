@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "templateId": "aeon.credit-card.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "AEON OPENING BALANCE BALANCE BROUGHT FORWARD GOLD VS PAYWAVE SUBTOTAL อิออน ใบแจ้งยอดค่าใช้จ่ายบัตรเครดิต ใบแจ้งการชำระเงิน\n01/01/2026 01/01/2026 SYNTHETIC PURCHASE SYNTHETIC SAMPLE 42.00",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 21,
+            "y": 442.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 77,
+            "y": 442.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+            "x": 131,
+            "y": 442.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 426,
+            "y": 442.5,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "bbl.savings.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "Bangkok Bank STATEMENT OF SAVING ACCOUNT Account No. ธนาคารกรุงเทพ Bangkok Bank ธนาคารกรุงเทพ ใบแจ้งรายการบัญชีเงินฝากสะสมทรัพย์ เลขที่บัญชี\n01/01/2026 SYNTHETIC PURCHASE SYNTHETIC SAMPLE TEST 42.00 958.00 TEST",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 21,
+            "y": 360,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+            "x": 56,
+            "y": 360,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 236,
+            "y": 360,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 246,
+            "y": 360,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "958.00",
+            "x": 371,
+            "y": 360,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 431,
+            "y": 360,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "kbank.credit-card.v1",
+      "extracted": {
+        "pageCount": 2,
+        "text": "ACCOUNT SUMMARY CARD NUMBER KBANK KASIKORNBANK กสิกรไทย กสิกรไทย บัตรเครดิต ยอดรวมทุกบัตร\n01/01/2026 01/01/2026 SYNTHETIC PURCHASE SYNTHETIC SAMPLE 42.00",
+        "items": [
+          {
+            "pageNumber": 2,
+            "text": "01/01/2026",
+            "x": 21,
+            "y": 255,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 2,
+            "text": "01/01/2026",
+            "x": 76,
+            "y": 255,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 2,
+            "text": "SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+            "x": 126,
+            "y": 255,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 2,
+            "text": "42.00",
+            "x": 431,
+            "y": 255,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "kbank.savings.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "เลขที่บัญชีเงินฝาก รวมถอนเงิน รวมฝากเงิน KASIKORNBANK KBANK กสิกรไทย กสิกรไทย รายการเดินบัญชี KBank\n01-01-2026 12:00 โอนไป SYNTHETIC SAMPLE 42.00 958.00 TEST โอนไป SYNTHETIC SAMPLE",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01-01-2026",
+            "x": 61,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "12:00",
+            "x": 101,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "โอนไป SYNTHETIC SAMPLE",
+            "x": 123.9,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 221,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "958.00",
+            "x": 296,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 333.9,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "โอนไป SYNTHETIC SAMPLE",
+            "x": 404.9,
+            "y": 367.5,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T12:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "krungsri.savings.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "รายการเดินบัญชีเงินฝากออมทรัพย์ เลขบัญชีเงินฝาก KRUNGSRI BANK OF AYUDHYA กรุงศรี กรุงศรี ธนาคารกรุงศรีอยุธยา รายการเดินบัญชี\n01/01/2026 42.00 958.00 TEST โอนเงิน SYNTHETIC SAMPLE",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 21,
+            "y": 302.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 246,
+            "y": 302.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "958.00",
+            "x": 336,
+            "y": 302.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 406,
+            "y": 302.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "โอนเงิน SYNTHETIC SAMPLE",
+            "x": 466,
+            "y": 302.5,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "krungthai.savings.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "รายการบัญชีระหว่างวันที่ เลขที่บัญชี สกุลเงิน KRUNGTHAI KTB กรุงไทย กรุงไทย รายการเดินบัญชี KTB\n01/01/2026 จ่าย SYNTHETIC SAMPLE จ่าย SYNTHETIC SAMPLE 42.00 958.00 TEST",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 36,
+            "y": 390,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "จ่าย SYNTHETIC SAMPLE",
+            "x": 81,
+            "y": 390,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "จ่าย SYNTHETIC SAMPLE",
+            "x": 206,
+            "y": 390,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 336,
+            "y": 390,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "958.00",
+            "x": 471,
+            "y": 390,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 536,
+            "y": 390,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "ktc.credit-card.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "STATEMENT OF CREDIT CARD CARD NUMBER KTC KRUNGTHAI CARD เคทีซี เคทีซี บัตรเครดิต ใบแจ้งยอด\n01/01/2026 01/01/2026 SYNTHETIC PURCHASE SYNTHETIC SAMPLE 42.00",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 51,
+            "y": 477.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 136,
+            "y": 477.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+            "x": 211,
+            "y": 477.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 501,
+            "y": 477.5,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "scb.savings.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "STATEMENT OF SAVING ACCOUNT Account No. SCB ไทยพาณิชย์ SIAM COMMERCIAL BANK ไทยพาณิชย์ รายการเดินบัญชี SCB\n01/01/2026 X2 TEST 42.00 958.00 SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01/01/2026",
+            "x": 26,
+            "y": 352.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "X2",
+            "x": 95.9,
+            "y": 352.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 121,
+            "y": 352.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 191,
+            "y": 352.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "958.00",
+            "x": 331,
+            "y": 352.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+            "x": 394.9,
+            "y": 352.5,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "ttb.credit-card.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "วงเงินบัตร หมายเลขบัตร รายการรอเรียกเก็บ รายการเรียกเก็บแล้ว ทหารไทยธนชาต รายการเดินบัญชี วงเงินบัตร หมายเลขบัตร\n01 ม.ค. 69 01 ม.ค. 69 SYNTHETIC PURCHASE SYNTHETIC SAMPLE 42.00",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01 ม.ค. 69",
+            "x": 36,
+            "y": 385,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "01 ม.ค. 69",
+            "x": 116,
+            "y": 385,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "SYNTHETIC PURCHASE SYNTHETIC SAMPLE",
+            "x": 196,
+            "y": 385,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 496,
+            "y": 385,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T00:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    },
+    {
+      "templateId": "ttb.savings.v1",
+      "extracted": {
+        "pageCount": 1,
+        "text": "รายการเดินบัญชีเงินฝาก เลขที TTB TMBTHANACHART ทีทีบี ทหารไทยธนชาต ทหารไทยธนชาต ทีทีบี รายการเดินบัญชี\n01 ม.ค. 69 12:00 โอนเงินออก SYNTHETIC SAMPLE TEST 42.00 958.00",
+        "items": [
+          {
+            "pageNumber": 1,
+            "text": "01 ม.ค. 69",
+            "x": 33,
+            "y": 392.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "12:00",
+            "x": 79,
+            "y": 392.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "โอนเงินออก SYNTHETIC SAMPLE",
+            "x": 109,
+            "y": 392.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "TEST",
+            "x": 246,
+            "y": 392.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "42.00",
+            "x": 361,
+            "y": 392.5,
+            "width": 20,
+            "height": 10
+          },
+          {
+            "pageNumber": 1,
+            "text": "958.00",
+            "x": 501,
+            "y": 392.5,
+            "width": 20,
+            "height": 10
+          }
+        ]
+      },
+      "expected": [
+        {
+          "amountMinor": 4200,
+          "transactionDateTime": "2026-01-01T12:00:00+07:00",
+          "direction": "debit"
+        }
+      ]
+    }
+  ]
+}

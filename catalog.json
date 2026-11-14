@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "recipes": [
+    {
+      "templateId": "aeon.credit-card.v1",
+      "institutionId": "aeon",
+      "institutionName": "AEON",
+      "displayName": "AEON credit card",
+      "country": "TH",
+      "statementKind": "credit_card",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "eb2d78cf5222d39f4675767bf3c121a91d634a1572708f51eb1060aba8fc9ae3",
+      "path": "templates/th/aeon/credit-card.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "bbl.savings.v1",
+      "institutionId": "bbl",
+      "institutionName": "Bangkok Bank",
+      "displayName": "Bangkok Bank bank account",
+      "country": "TH",
+      "statementKind": "bank_account",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "ee2d6733ce99715629383f50452e13d554c04d9d96ef318df9ada6da84019af9",
+      "path": "templates/th/bbl/savings.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "kbank.credit-card.v1",
+      "institutionId": "kbank",
+      "institutionName": "Kasikornbank",
+      "displayName": "Kasikornbank credit card",
+      "country": "TH",
+      "statementKind": "credit_card",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "013dcec5d09fbe1c30bfe17c471aa3bc149ecda5d0e6586df721a09849a38c13",
+      "path": "templates/th/kbank/credit-card.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "kbank.savings.v1",
+      "institutionId": "kbank",
+      "institutionName": "Kasikornbank",
+      "displayName": "Kasikornbank bank account",
+      "country": "TH",
+      "statementKind": "bank_account",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "633b996d8d0984952056f44e7bdffe7e374765b1478ffb2317b6edd2170c0ca8",
+      "path": "templates/th/kbank/savings.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "krungsri.savings.v1",
+      "institutionId": "krungsri",
+      "institutionName": "Krungsri",
+      "displayName": "Krungsri bank account",
+      "country": "TH",
+      "statementKind": "bank_account",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "8c85ebf3a3be990e6907815b4b43b9851cfee6c304d694db95a34f6ef63fb4af",
+      "path": "templates/th/krungsri/savings.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "krungthai.savings.v1",
+      "institutionId": "krungthai",
+      "institutionName": "Krungthai",
+      "displayName": "Krungthai bank account",
+      "country": "TH",
+      "statementKind": "bank_account",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "0d4f4130d8e4b3780491f5d8f0a8d28e26fd5ab78f217d69338479940f6dcf72",
+      "path": "templates/th/krungthai/savings.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "ktc.credit-card.v1",
+      "institutionId": "ktc",
+      "institutionName": "KTC",
+      "displayName": "KTC credit card",
+      "country": "TH",
+      "statementKind": "credit_card",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "77715750ec313c2db2a73303c0b13301070e47f06d63afde3a13403a6d531ab3",
+      "path": "templates/th/ktc/credit-card.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "scb.savings.v1",
+      "institutionId": "scb",
+      "institutionName": "Siam Commercial Bank",
+      "displayName": "Siam Commercial Bank bank account",
+      "country": "TH",
+      "statementKind": "bank_account",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "5019fd27ba8590e7335424ef105610ede65b205e2888d7e08cd43f267e15448e",
+      "path": "templates/th/scb/savings.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "ttb.credit-card.v1",
+      "institutionId": "ttb",
+      "institutionName": "ttb",
+      "displayName": "ttb credit card",
+      "country": "TH",
+      "statementKind": "credit_card",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "45f49f6a372cea6b167221909ae04546265a17ef4b2f43f1d7895590fef06c52",
+      "path": "templates/th/ttb/credit-card.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    },
+    {
+      "templateId": "ttb.savings.v1",
+      "institutionId": "ttb",
+      "institutionName": "ttb",
+      "displayName": "ttb bank account",
+      "country": "TH",
+      "statementKind": "bank_account",
+      "revision": 1,
+      "schemaVersion": 1,
+      "requiredCapabilities": [
+        "thai-statements-v1"
+      ],
+      "sha256": "27d4cc1dcdf40e0e05d58de88ecc77291f31027d48d50c0fcfd10cb7ed4a1a04",
+      "path": "templates/th/ttb/savings.v1.json",
+      "changeSummary": "Initial reviewed bundled recipe."
+    }
+  ]
+}

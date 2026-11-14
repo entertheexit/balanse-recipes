@@ -1,0 +1,8 @@
+{
+  "name": "balanse-statement-recipes",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": { "test": "node validate.mjs" },
+  "devDependencies": { "ajv": "8.17.1" }
+}

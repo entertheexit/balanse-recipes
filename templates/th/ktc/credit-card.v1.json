@@ -1,0 +1,65 @@
+{
+  "institutionId": "ktc",
+  "templateId": "ktc.credit-card.v1",
+  "country": "TH",
+  "statementKind": "credit_card",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["เคทีซี", "บัตรเครดิต", "ใบแจ้งยอด"],
+      "en": ["KTC", "KRUNGTHAI CARD", "CREDIT CARD STATEMENT"]
+    },
+    "requiredAll": ["STATEMENT OF CREDIT CARD", "CARD NUMBER"],
+    "requiredAny": ["KTC", "KRUNGTHAI CARD", "เคทีซี"],
+    "negativeKeywords": []
+  },
+  "accountHints": {
+    "regexes": ["(?:Card|บัตร)\\s*(?:No\\.|Number|เลขที่)?\\s*[:：]?\\s*(?<accountId>[0-9Xx*\\- ]{4,})"],
+    "labelKeywords": ["Card No.", "เลขที่บัตร"]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": "all",
+        "xMin": 50,
+        "xMax": 585,
+        "yMin": 190,
+        "yMax": 765
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 50, "xMax": 135, "required": true },
+      { "name": "postedDate", "xMin": 135, "xMax": 210 },
+      { "name": "description", "xMin": 210, "xMax": 500, "required": true },
+      { "name": "amount", "xMin": 500, "xMax": 585, "required": true }
+    ],
+    "rowStartRegex": "^\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}$",
+    "dateRegex": "\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}",
+    "postedDateRegex": "\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}",
+    "amountRegex": "[-+]?\\s*\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 3,
+      "requiredColumns": ["date", "description", "amount"],
+      "headerSkipKeywords": ["TRANS DATE", "POSTING DATE", "DESCRIPTION", "AMOUNT"],
+      "stopBeforeKeywords": [],
+      "continuationColumns": []
+    },
+    "directionRules": {
+      "debitIndicators": [],
+      "creditIndicators": [],
+      "debitCodes": [],
+      "creditCodes": [],
+      "positiveAmountDirection": "debit",
+      "negativeAmountDirection": "credit"
+    }
+  }
+}

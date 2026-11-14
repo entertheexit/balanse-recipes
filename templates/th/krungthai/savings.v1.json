@@ -1,0 +1,67 @@
+{
+  "institutionId": "krungthai",
+  "templateId": "krungthai.savings.v1",
+  "country": "TH",
+  "statementKind": "bank_account",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["กรุงไทย", "รายการเดินบัญชี", "KTB"],
+      "en": ["KRUNGTHAI", "KTB", "ACCOUNT STATEMENT"]
+    },
+    "requiredAll": ["รายการบัญชีระหว่างวันที่", "เลขที่บัญชี", "สกุลเงิน"],
+    "requiredAny": ["KRUNGTHAI", "KTB", "กรุงไทย"],
+    "negativeKeywords": ["KRUNGTHAI CARD", "STATEMENT OF CREDIT CARD", "ใบแจ้งยอดค่าใช้จ่ายบัตรเครดิต"]
+  },
+  "accountHints": {
+    "regexes": ["(?:Account|บัญชี)\\s*(?:No\\.|Number|เลขที่)?\\s*[:：]?\\s*(?<accountId>[0-9Xx*\\- ]{4,})"],
+    "labelKeywords": ["Account No.", "เลขที่บัญชี"]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": "all",
+        "xMin": 35,
+        "xMax": 575,
+        "yMin": 190,
+        "yMax": 590
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 35, "xMax": 80, "required": true },
+      { "name": "description", "xMin": 80, "xMax": 205, "required": true },
+      { "name": "details", "xMin": 205, "xMax": 335 },
+      { "name": "debitAmount", "xMin": 335, "xMax": 405 },
+      { "name": "creditAmount", "xMin": 405, "xMax": 470 },
+      { "name": "balance", "xMin": 470, "xMax": 535, "required": true },
+      { "name": "code", "xMin": 535, "xMax": 575 }
+    ],
+    "rowStartRegex": "^\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}",
+    "dateRegex": "\\d{1,2}[/-]\\d{1,2}[/-]\\d{2,4}",
+    "amountRegex": "\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "balanceRegex": "[-+]?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description", "details"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 12,
+      "requiredColumns": ["date", "description", "balance"],
+      "headerSkipKeywords": ["วันที่/เวลา", "รายการถอน", "รายการฝาก", "ยอดเงินคงเหลือ"],
+      "stopBeforeKeywords": [],
+      "continuationColumns": []
+    },
+    "directionRules": {
+      "debitIndicators": ["จ่าย", "โอนเงินออก", "ถอน"],
+      "creditIndicators": ["เงินโอนเข้า", "รับโอน", "ฝาก"],
+      "debitCodes": [],
+      "creditCodes": [],
+      "positiveAmountDirection": "unknown"
+    }
+  }
+}

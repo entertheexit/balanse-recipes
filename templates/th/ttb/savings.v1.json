@@ -1,0 +1,70 @@
+{
+  "institutionId": "ttb",
+  "templateId": "ttb.savings.v1",
+  "country": "TH",
+  "statementKind": "bank_account",
+  "version": 1,
+  "languages": ["th", "en"],
+  "detection": {
+    "keywordsByLanguage": {
+      "th": ["ทหารไทยธนชาต", "ทีทีบี", "รายการเดินบัญชี"],
+      "en": ["TTB", "TMBTHANACHART", "ACCOUNT STATEMENT"]
+    },
+    "requiredAll": ["รายการเดินบัญชีเงินฝาก", "เลขที"],
+    "requiredAny": ["TTB", "TMBTHANACHART", "ทีทีบี", "ทหารไทยธนชาต"],
+    "negativeKeywords": ["วงเงินบัตร", "หมายเลขบัตร", "รายการรอเรียกเก็บ"]
+  },
+  "accountHints": {
+    "regexes": [
+      "เลขที[^\\s]*บัญชีเงินฝาก\\s*(?<accountId>[0-9]{3}-[0-9]-[0-9]{5}-[0-9])",
+      "(?:Account|บัญชี)\\s*(?:No\\.|Number|เลขที่)?\\s*[:：]?\\s*(?<accountId>[0-9Xx*\\- ]{4,})"
+    ],
+    "labelKeywords": ["Account No.", "เลขที่บัญชี"]
+  },
+  "extraction": {
+    "mode": "position-table",
+    "pageRegions": [
+      {
+        "page": "all",
+        "xMin": 30,
+        "xMax": 585,
+        "yMin": 240,
+        "yMax": 545
+      }
+    ],
+    "columns": [
+      { "name": "date", "xMin": 32, "xMax": 78, "required": true },
+      { "name": "time", "xMin": 78, "xMax": 108, "required": true },
+      { "name": "description", "xMin": 108, "xMax": 245, "required": true },
+      { "name": "channel", "xMin": 245, "xMax": 300 },
+      { "name": "amount", "xMin": 360, "xMax": 430, "required": true },
+      { "name": "balance", "xMin": 500, "xMax": 580, "required": true }
+    ],
+    "rowStartRegex": "^\\d{1,2}\\s+\\S+\\s+\\d{2,4}$",
+    "dateRegex": "\\d{1,2}\\s+\\S+\\s+\\d{2,4}",
+    "amountRegex": "[-+]\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})",
+    "balanceRegex": "[-+]?\\d{1,3}(?:,\\d{3})*(?:\\.\\d{2})?",
+    "descriptionRules": [
+      {
+        "source": "columns",
+        "columns": ["description"],
+        "joinWith": " "
+      }
+    ],
+    "rowGrouping": {
+      "yTolerance": 3,
+      "requiredColumns": ["date", "description", "amount", "balance"],
+      "headerSkipKeywords": ["วันที่", "เวลา", "รายการ", "ยอดเงินคงเหลือ"],
+      "stopBeforeKeywords": [],
+      "continuationColumns": []
+    },
+    "directionRules": {
+      "debitIndicators": ["โอนเงินออก", "จ่ายบิล", "เติมเงิน", "ถอน"],
+      "creditIndicators": ["รับเงินโอน", "ฝาก"],
+      "debitCodes": [],
+      "creditCodes": [],
+      "positiveAmountDirection": "credit",
+      "negativeAmountDirection": "debit"
+    }
+  }
+}

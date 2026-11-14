@@ -1,0 +1,396 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "institutionId": {
+      "type": "string",
+      "maxLength": 100,
+      "pattern": "^(?:aeon|bbl|scb|kbank|krungsri|krungthai|ktc|ttb|unknown|[a-z]{2}\\.[a-z0-9]+(?:-[a-z0-9]+)*)$",
+      "not": {
+        "const": "unknown"
+      }
+    },
+    "templateId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "country": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "statementKind": {
+      "type": "string",
+      "enum": [
+        "bank_account",
+        "credit_card",
+        "loan"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 35,
+        "pattern": "^(?:unknown|[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*)$",
+        "not": {
+          "const": "unknown"
+        }
+      },
+      "minItems": 1
+    },
+    "detection": {
+      "type": "object",
+      "properties": {
+        "keywordsByLanguage": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "maxLength": 35,
+            "pattern": "^(?:unknown|[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*)$",
+            "not": {
+              "const": "unknown"
+            }
+          },
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": []
+          }
+        },
+        "requiredAll": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "requiredAny": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "negativeKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "required": [
+        "keywordsByLanguage"
+      ],
+      "additionalProperties": false
+    },
+    "accountHints": {
+      "type": "object",
+      "properties": {
+        "regexes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "labelKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      },
+      "required": [],
+      "additionalProperties": false,
+      "default": {
+        "regexes": [],
+        "labelKeywords": []
+      }
+    },
+    "extraction": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "text-regex",
+            "position-table"
+          ],
+          "default": "text-regex"
+        },
+        "pageRegions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "const": "all"
+                  }
+                ],
+                "default": "all"
+              },
+              "xMin": {
+                "type": "number"
+              },
+              "xMax": {
+                "type": "number"
+              },
+              "yMin": {
+                "type": "number"
+              },
+              "yMax": {
+                "type": "number"
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "xMin": {
+                "type": "number"
+              },
+              "xMax": {
+                "type": "number"
+              },
+              "required": {
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "required": [
+              "name"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "rowStartRegex": {
+          "type": "string"
+        },
+        "dateRegex": {
+          "type": "string"
+        },
+        "postedDateRegex": {
+          "type": "string"
+        },
+        "amountRegex": {
+          "type": "string"
+        },
+        "balanceRegex": {
+          "type": "string"
+        },
+        "descriptionRules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "line",
+                  "columns"
+                ],
+                "default": "line"
+              },
+              "columns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "joinWith": {
+                "type": "string",
+                "default": " "
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "rowGrouping": {
+          "type": "object",
+          "properties": {
+            "yTolerance": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "default": 3
+            },
+            "requiredColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "headerSkipKeywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "stopBeforeKeywords": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "continuationColumns": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "required": [],
+          "additionalProperties": false,
+          "default": {
+            "yTolerance": 3,
+            "requiredColumns": [],
+            "headerSkipKeywords": [],
+            "stopBeforeKeywords": [],
+            "continuationColumns": []
+          }
+        },
+        "directionRules": {
+          "type": "object",
+          "properties": {
+            "debitIndicators": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "creditIndicators": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "debitCodes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "creditCodes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "positiveAmountDirection": {
+              "type": "string",
+              "enum": [
+                "debit",
+                "credit",
+                "unknown"
+              ]
+            },
+            "negativeAmountDirection": {
+              "type": "string",
+              "enum": [
+                "debit",
+                "credit",
+                "unknown"
+              ]
+            }
+          },
+          "required": [],
+          "additionalProperties": false,
+          "default": {
+            "debitIndicators": [],
+            "creditIndicators": [],
+            "debitCodes": [],
+            "creditCodes": []
+          }
+        },
+        "resolverHints": {
+          "type": "object",
+          "properties": {
+            "headerAnchors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "amountColumnHints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "balanceColumnHints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            },
+            "continuationHints": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "required": [],
+          "additionalProperties": false,
+          "default": {
+            "headerAnchors": [],
+            "amountColumnHints": [],
+            "balanceColumnHints": [],
+            "continuationHints": []
+          }
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "institutionId",
+    "templateId",
+    "country",
+    "statementKind",
+    "version",
+    "languages",
+    "detection",
+    "extraction"
+  ],
+  "additionalProperties": false
+}
